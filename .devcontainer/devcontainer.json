@@ -17,7 +17,7 @@
 	// Configure tool-specific properties.
 	"customizations": {
 		"vscode": {
-			"extensions": ["ms-azuretools.vscode-azurestorage"]
+			"extensions": ["orta.vscode-jest"]
 		}
 	}
 
