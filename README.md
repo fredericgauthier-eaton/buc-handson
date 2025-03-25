@@ -19,7 +19,6 @@ GET http://localhost:3000/people/search?name=Luiz
 HEADERS
 -username
 -password
--authorization
 
 POST JSON example
 {

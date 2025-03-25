@@ -1,20 +1,28 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const app = express();
 const rescue = require('express-rescue');
-const routes = require('../routes/peopleRouter')
-const cors = require('cors')
-const middleware = require('../middlewares/index')
-const limiter = require('../utils/rateLimit')
+const cors = require('cors');
+const middleware = require('../middlewares/index');
+const limiter = require('../utils/rateLimit');
 const helmet = require("helmet");
-const morgan = require("morgan")
+const morgan = require("morgan");
+const peopleServicesFactory = require('../services/peopleServices'); // Import the factory function
 
-app.use(morgan("common"))
-app.use(helmet()); //for security Express.js purposes
-app.use(cors());
-app.use(limiter)
-app.use(bodyParser.json());
-app.use('/people', rescue(routes.peopleRouter))
-app.use(middleware.errorMiddleware)
+module.exports = () => {
+    const app = express();
+    const peopleServices = peopleServicesFactory(); // Create a new instance of peopleServices
 
-module.exports = app
+    app.use(morgan("common"));
+    app.use(helmet()); // for security Express.js purposes
+    app.use(cors());
+    app.use(limiter);
+    app.use(bodyParser.json());
+
+    app.get('/people', rescue(peopleServices.getAllPeople));
+    app.post('/people', rescue(peopleServices.createPeople));
+    app.get('/people/:id', rescue(peopleServices.getById));
+
+    app.use(middleware.errorMiddleware);
+
+    return app;
+};

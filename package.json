@@ -18,7 +18,8 @@
     "express-rate-limit": "^6.4.0",
     "express-rescue": "^1.1.31",
     "helmet": "^5.1.0",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@types/jest": "^28.1.1",
