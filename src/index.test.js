@@ -36,7 +36,7 @@ describe('People API (stateless simulation)', () => {
         newPerson.id = 2;
         persons.push(newPerson);
 
-        res = await request(app1)
+        res = await request(app2)
             .get("/people")
             .set('username', 'calaca')
             .set('password', '12345')
