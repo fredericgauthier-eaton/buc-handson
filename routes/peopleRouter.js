@@ -4,9 +4,9 @@ const services = require('../services/peopleServices')
 
 const peopleRouter = express.Router();
 
-peopleRouter.post('/', middleware.authMiddleware, services.createPeople)
-peopleRouter.get('/search', middleware.authMiddleware, services.searchPeople)
-peopleRouter.get('/', middleware.authMiddleware, services.getAllPeople)
-peopleRouter.get('/:id', middleware.authMiddleware, services.getById)
+peopleRouter.post('/', middleware.authMiddleware, middleware.connectMiddleware, services.createPeople)
+peopleRouter.get('/search', middleware.authMiddleware, middleware.connectMiddleware, services.searchPeople)
+peopleRouter.get('/', middleware.authMiddleware, middleware.connectMiddleware, services.getAllPeople)
+peopleRouter.get('/:id', middleware.authMiddleware, middleware.connectMiddleware, services.getById)
 
 module.exports = { peopleRouter }
