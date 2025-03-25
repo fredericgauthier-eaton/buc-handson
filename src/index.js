@@ -17,6 +17,8 @@ module.exports = () => {
     app.use(cors());
     app.use(limiter);
     app.use(bodyParser.json());
+    app.use(middleware.authMiddleware);
+    app.use(middleware.connectMiddleware);
 
     app.get('/people', rescue(peopleServices.getAllPeople));
     app.post('/people', rescue(peopleServices.createPeople));
