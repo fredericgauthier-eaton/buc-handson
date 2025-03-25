@@ -11,12 +11,18 @@ describe('People API (stateless simulation)', () => {
     });
 
     it("Simulation of 2 instances, test that the microservice is stateless", async () => {
-        let persons = [
-            { id: 0, name: 'Luiz', age: 32 },
-            { id: 1, name: 'Peter', age: 26 }
+        let persons = [            
         ];
 
         let res = await request(app1)
+        .delete("/people")
+        .set('username', 'calaca')
+        .set('password', '12345')
+        .expect(200);
+
+        expect(res.body).toEqual(persons);
+
+        res = await request(app1)
             .get("/people")
             .set('username', 'calaca')
             .set('password', '12345')
@@ -33,7 +39,7 @@ describe('People API (stateless simulation)', () => {
             .set('password', '12345')
             .expect(201); // Expect 201 for successful creation
 
-        newPerson.id = 2;
+        newPerson.id = 0;
         persons.push(newPerson);
 
         res = await request(app2)
@@ -42,13 +48,6 @@ describe('People API (stateless simulation)', () => {
             .set('password', '12345')
             .expect(200);
         expect(res.body).toEqual(persons); // app2 should not reflect changes made in app1*/
-
         
-       /* res = await request(app2)
-            .get("/people")
-            .set('username', 'calaca')
-            .set('password', '12345')
-            .expect(200);
-        expect(res.body).toEqual(persons); // app2 should not reflect changes made in app1*/
     });
 });

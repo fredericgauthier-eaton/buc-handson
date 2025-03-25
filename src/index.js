@@ -20,6 +20,7 @@ module.exports = () => {
 
     app.get('/people', rescue(peopleServices.getAllPeople));
     app.post('/people', rescue(peopleServices.createPeople));
+    app.delete('/people', rescue(peopleServices.deletePeoples));
     app.get('/people/:id', rescue(peopleServices.getById));
 
     app.use(middleware.errorMiddleware);

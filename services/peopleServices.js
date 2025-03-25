@@ -1,7 +1,5 @@
 module.exports = () => {
-    let person = [
-        { id: 0, name: 'Luiz', age: 32 },
-        { id: 1, name: 'Peter', age: 26 }
+    let person = [        
     ];
 
     const searchPeople = (req, res, next) => {
@@ -36,9 +34,16 @@ module.exports = () => {
         res.status(201).json({ id, name, age });
     };
 
+    const deletePeoples = (req, res, next) => {        
+        person = []
+
+        res.status(200).json([]);
+    };
+    
     return {
         createPeople,
         searchPeople,
+        deletePeoples,
         getAllPeople,
         getById
     };
