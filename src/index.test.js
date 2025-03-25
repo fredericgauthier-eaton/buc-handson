@@ -2,6 +2,8 @@ const request = require("supertest");
 
 let createApp = require('./index'); // Import the app factory function
 
+require('dotenv').config();	// Load environment variables
+
 describe('People API (stateless simulation)', () => {
     let app1, app2;
 
