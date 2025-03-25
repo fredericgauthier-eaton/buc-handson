@@ -1,0 +1,3 @@
+AZURE_TABLE_SAS=<insert your SAS here>
+AZURE_TABLE_ACCOUNT=interviewcloudetn
+AZURE_TABLE_TABLENAME=peoples
