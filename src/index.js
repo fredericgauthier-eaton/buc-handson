@@ -6,6 +6,7 @@ const middleware = require('../middlewares');
 const limiter = require('../utils/rateLimit');
 const helmet = require("helmet");
 const morgan = require("morgan");
+
 const peopleServicesFactory = require('../services/peopleServices'); // Import the factory function
 
 module.exports = () => {
@@ -17,7 +18,7 @@ module.exports = () => {
     app.use(cors());
     app.use(limiter);
     app.use(bodyParser.json());
-
+    app.use(middleware.authMiddleware);
     app.get('/people', rescue(peopleServices.getAllPeople));
     app.post('/people', rescue(peopleServices.createPeople));
     app.delete('/people', rescue(peopleServices.deletePeoples));
