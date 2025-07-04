@@ -1,32 +1,25 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
+// README at: https://github.com/devcontainers/templates/tree/main/src/dotnet
 {
-	"name": "Node.js & .NET Development",
+	"name": ".NET Development",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
-	// Features to add to the dev container. More info: https://containers.dev/features.
-	"features": {
-		"ghcr.io/devcontainers/features/dotnet:2": {
-			"version": "8.0",
-			"installUsingApt": false
-		}
-	},
+	"image": "mcr.microsoft.com/devcontainers/dotnet:1-8.0-bookworm",
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
 		5000,
 		5001
 	],
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "cd nodejs && npm install && cd ../C# && dotnet restore",
+	"postCreateCommand": "dotnet restore",
 	// Configure tool-specific properties.
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"orta.vscode-jest",
 				"ms-dotnettools.csharp",
 				"ms-dotnettools.csdevkit",
 				"ms-dotnettools.vscode-dotnet-runtime",
-				"ms-vscode.vscode-json"
+				"ms-vscode.vscode-json",
+				"ms-dotnettools.vscodeintellicode-csharp"
 			],
 			"settings": {
 				"dotnet.defaultSolution": "C#/buc-handson.sln"
