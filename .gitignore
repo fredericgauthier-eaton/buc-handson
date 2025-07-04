@@ -9,3 +9,5 @@
 *.userprefs
 packages/
 .nuget/
+obj
+bin
