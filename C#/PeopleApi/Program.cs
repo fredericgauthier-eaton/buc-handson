@@ -1,7 +1,7 @@
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
-using System.Collections.Concurrent;
+using PeopleApi.Middlewares;
+using PeopleApi.Services;
 using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -72,42 +72,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("AllowLocalhost");
 app.UseRateLimiter();
-app.Use(async (context, next) =>
-{
-    // Logging (like morgan)
-    Console.WriteLine($"{context.Request.Method} {context.Request.Path}");
-    await next();
-});
-app.Use(async (context, next) =>
-{
-    // Security headers (like helmet)
-    context.Response.Headers["X-Content-Type-Options"] = "nosniff";
-    context.Response.Headers["X-Frame-Options"] = "DENY";
-    context.Response.Headers["X-XSS-Protection"] = "1; mode=block";
-    await next();
-});
 
-// Auth middleware
-app.Use(async (context, next) =>
-{
-    var username = context.Request.Headers["username"].FirstOrDefault();
-    var password = context.Request.Headers["password"].FirstOrDefault();
-    if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
-    {
-        context.Response.StatusCode = 401;
-        await context.Response.WriteAsJsonAsync(new { message = "Username or password can't be blank!" });
-        return;
-    }
-    if (username != "calaca" || password != "12345")
-    {
-        context.Response.StatusCode = 401;
-        await context.Response.WriteAsJsonAsync(new { message = "Invalid credentials!" });
-        return;
-    }
-    await next();
-});
+app.UseMiddleware<RequestLoggingMiddleware>();
+app.UseMiddleware<SecurityHeadersMiddleware>();
+app.UseMiddleware<AuthMiddleware>();
 
-// Error handling middleware
+// Error handler
 app.UseExceptionHandler(errorApp =>
 {
     errorApp.Run(async context =>
@@ -119,8 +89,6 @@ app.UseExceptionHandler(errorApp =>
 });
 
 // In-memory stateless store (per instance)
-var peopleStore = app.Services.GetRequiredService<PeopleStore>();
-
 app.MapGet("/people", ([FromServices] PeopleStore store) => Results.Ok(store.GetAll()));
 
 app.MapGet("/people/{id:int}", ([FromServices] PeopleStore store, int id) =>
@@ -150,21 +118,3 @@ app.MapGet("/people/search", ([FromServices] PeopleStore store, string name) =>
 });
 
 app.Run("http://localhost:3000");
-
-public record Person(int Id, string Name, int Age);
-public record PersonDto(string Name, int Age);
-
-public class PeopleStore
-{
-    private List<Person> _people = new();
-    public IEnumerable<Person> GetAll() => _people;
-    public Person? GetById(int id) => _people.FirstOrDefault(p => p.Id == id);
-    public Person Add(string name, int age)
-    {
-        var person = new Person(_people.Count, name, age);
-        _people.Add(person);
-        return person;
-    }
-    public void Clear() => _people.Clear();
-    public IEnumerable<Person> Search(string name) => _people.Where(p => p.Name.Contains(name, StringComparison.OrdinalIgnoreCase));
-}

@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/C#/PeopleApi/bin
+/C#/PeopleApi/obj
+/C#/.vs
+/C#/PeopleApi.Tests/bin
+/C#/PeopleApi.Tests/obj
