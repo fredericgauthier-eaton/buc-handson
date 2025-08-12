@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Moq;
 using NUnit.Framework;
-using PeopleApi.Middlewares;
+using handson.Middlewares;
 using System.IO;
 using System.Text.Json;
 using System.Collections.Generic;

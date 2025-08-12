@@ -1,6 +1,6 @@
 using System;
 
-namespace PeopleApi.Services;
+namespace handson.Services;
 
 public record Person(int Id, string Name, int Age);
 public record PersonDto(string Name, int Age);

@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Moq;
 using NUnit.Framework;
-using PeopleApi.Middlewares;
+using handson.Middlewares;
 
-namespace PeopleApi.Tests.Middlewares;
+namespace handson.Tests.Middlewares;
 
 [TestFixture]
 public class RequestLoggingMiddlewareTests

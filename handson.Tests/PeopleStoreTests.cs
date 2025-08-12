@@ -1,4 +1,4 @@
-using PeopleApi.Services;
+using handson.Services;
 using NUnit.Framework;
 using System.Linq;
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PeopleApi.Middlewares;
+namespace handson.Middlewares;
 
 public class SecurityHeadersMiddleware
 {

@@ -2,9 +2,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleApi", "PeopleApi\PeopleApi.csproj", "{5192027F-B82C-CE2B-0B7C-2D32778C9512}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "handson", "handson\handson.csproj", "{5192027F-B82C-CE2B-0B7C-2D32778C9512}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleApi.Tests", "PeopleApi.Tests\PeopleApi.Tests.csproj", "{6A386421-AD64-48DD-B679-B67B9F289B3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "handson.Tests", "handson.Tests\handson.Tests.csproj", "{6A386421-AD64-48DD-B679-B67B9F289B3F}"
 	ProjectSection(ProjectDependencies) = postProject
 		{5192027F-B82C-CE2B-0B7C-2D32778C9512} = {5192027F-B82C-CE2B-0B7C-2D32778C9512}
 	EndProjectSection

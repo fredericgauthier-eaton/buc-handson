@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
-using PeopleApi.Middlewares;
-using PeopleApi.Services;
+using handson.Middlewares;
+using handson.Services;
 using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -47,7 +47,7 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowLocalhost",
-        policy => policy.WithOrigins("http://localhost:3000", "http://localhost:3001")
+        policy => policy.WithOrigins("http://localhost:4000", "http://localhost:3001")
                         .AllowAnyHeader()
                         .AllowAnyMethod());
 });
@@ -111,10 +111,11 @@ app.MapDelete("/people", ([FromServices] PeopleStore store) =>
     return Results.Ok(Array.Empty<Person>());
 });
 
+
 app.MapGet("/people/search", ([FromServices] PeopleStore store, string name) =>
 {
     var results = store.Search(name);
     return Results.Ok(results);
 });
 
-app.Run("http://localhost:3000");
+app.Run("http://localhost:4000");
